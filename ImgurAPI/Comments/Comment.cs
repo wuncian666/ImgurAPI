@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ImgurAPI.Comments
 {
-    internal class Comment
+    public class Comment
     {
         public Comment(IHttpRequest request)
         { }

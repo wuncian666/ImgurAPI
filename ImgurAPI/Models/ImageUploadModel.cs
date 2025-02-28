@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HttpUtils.Models
+namespace ImgurAPI.Models
 {
-    internal class ImageUploadModel
+    public class ImageUploadModel
     {
         public int status { get; set; }
         public bool success { get; set; }

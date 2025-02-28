@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ImgurAPI.Models.Params
 {
-    internal class ImageUploadParam
+    public class ImageUploadParam
     {
         public string Type { get; set; }
         public string Title { get; set; }

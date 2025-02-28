@@ -1,5 +1,4 @@
 ﻿using HttpUtils;
-using HttpUtils.Models;
 using ImgurAPI.Models;
 using ImgurAPI.Models.Params;
 using System;
@@ -12,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ImgurAPI.Images
 {
-    internal class Image
+    public class Image
     {
         private IHttpRequest _request;
 
