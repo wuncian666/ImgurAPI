@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ImgurAPI
 {
-    internal class ImgurContext
+    public class ImgurContext
     {
         private string _baseUrl = "https://api.imgur.com/3";
 
