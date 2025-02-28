@@ -1,5 +1,6 @@
-﻿using HttpUtils.Models;
+﻿using ImgurAPI.Configs;
 using ImgurAPI.Models;
+using ImgurAPI.Models.Params;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -14,11 +15,12 @@ namespace ImgurAPI
     {
         private static async Task Main(string[] args)
         {
-            ImgurContext context = new ImgurContext();
+            ImgurContext context = new ImgurContext(SecretsConfig.GetToken());
             //ImageModel result = context.Image.GetImage("nzK26wd");
             //UploadImageParam param = new UploadImageParam(@"D:\test_image.png");
             //UploadImageModel result = await context.Image.UploadImage(param);
-            GallerySearchModel result = await context.Gallery.GallerySearch("time", "week", 0, "cat");
+            GallerySearchModel result = await context.Gallery.GallerySearch(
+                new GallerySearchParam("time", "week", 0, "cat"));
             Console.WriteLine(result.data[0].id);
             Console.ReadKey();
         }

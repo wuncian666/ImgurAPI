@@ -1,6 +1,6 @@
 ﻿using HttpUtils;
-using HttpUtils.Models;
 using ImgurAPI.Models;
+using ImgurAPI.Models.Params;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,18 +9,21 @@ using System.Threading.Tasks;
 
 namespace ImgurAPI.Gellaries
 {
-    internal class Gallery
+    public class Gallery
     {
         private IHttpRequest _request;
 
         public Gallery(IHttpRequest request)
         { this._request = request; }
 
-        public async Task<GallerySearchModel> GallerySearch(string sort, string window, int page, string target)
+        public async Task<GallerySearchModel> GallerySearch(GallerySearchParam param)
         {
-            Dictionary<string, string> keyValuePairs = new Dictionary<string, string>();
-            keyValuePairs.Add("q", target);
-            return await this._request.GetAsync<GallerySearchModel>($"gallery/search/{sort}/{window}/{page}", keyValuePairs);
+            Dictionary<string, string> keyValuePairs = new Dictionary<string, string>
+            {
+                { "q", param.Query }
+            };
+            return await this._request.GetAsync<GallerySearchModel>(
+                $"gallery/search/{param.Sort}/{param.Window}/{param.Page}", keyValuePairs);
         }
 
         public async Task<GalleryAlbumModel> GalleryAlbum(string galleryHash)
