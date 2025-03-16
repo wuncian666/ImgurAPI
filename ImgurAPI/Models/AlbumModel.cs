@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ImgurAPI.Models
 {
-    internal class AlbumModel
+    public class AlbumModel
     {
         public int status { get; set; }
         public bool success { get; set; }

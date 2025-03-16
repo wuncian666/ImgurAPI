@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ImgurAPI.Models.Params
 {
-    internal class AlbumCreationParam
+    public class AlbumCreationParam
     {
         public string[] Ids { get; set; }
 
