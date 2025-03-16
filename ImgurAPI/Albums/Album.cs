@@ -8,9 +8,9 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ImgurAPI.Album
+namespace ImgurAPI.Albums
 {
-    internal class Album
+    public class Album
     {
         private IHttpRequest _request;
 
@@ -49,9 +49,9 @@ namespace ImgurAPI.Album
             return await this._request.GetAsync<AlbumImageVotesModel>($"gallery/{gallerHash}/votes");
         }
 
-        public async Task<AlbumImageVotesModel> AlbumImageVoting(string gallerHash, string vote)
+        public async Task<AlbumImageVotingModel> AlbumImageVoting(string gallerHash, string vote)
         {
-            return await this._request.PostAsync<AlbumImageVotesModel>($"gallery/{gallerHash}/vote/{vote}", null, null);
+            return await this._request.PostAsync<AlbumImageVotingModel>($"gallery/{gallerHash}/vote/{vote}", null, null);
         }
 
         public async Task<AlbumImageCommentCreationModel> AlbumImageCommentCreation(string gallerHash, string comment)
