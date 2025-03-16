@@ -1,5 +1,7 @@
 ﻿using HttpUtils;
+using ImgurAPI.Albums;
 using ImgurAPI.Gellaries;
+using ImgurAPI.Images;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,7 +19,9 @@ namespace ImgurAPI
 
         public Gallery Gallery;
 
-        public Images.Image Image;
+        public Image Image;
+
+        public Album Album;
 
         public ImgurContext()
         {
@@ -28,7 +32,8 @@ namespace ImgurAPI
             };
             this.Comment = new Comments.Comment(httpRequest);
             this.Gallery = new Gallery(httpRequest);
-            this.Image = new Images.Image(httpRequest);
+            this.Image = new Image(httpRequest);
+            this.Album = new Album(httpRequest);
         }
     }
 }
