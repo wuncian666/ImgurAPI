@@ -1,4 +1,5 @@
 ﻿using HttpUtils;
+using ImgurAPI.Accounts;
 using ImgurAPI.Albums;
 using ImgurAPI.Gellaries;
 using ImgurAPI.Images;
@@ -23,6 +24,8 @@ namespace ImgurAPI
 
         public Album Album;
 
+        public Account Account;
+
         public ImgurContext()
         {
             IHttpRequest httpRequest = new HttpRequest
@@ -34,6 +37,7 @@ namespace ImgurAPI
             this.Gallery = new Gallery(httpRequest);
             this.Image = new Image(httpRequest);
             this.Album = new Album(httpRequest);
+            this.Account = new Account(httpRequest);
         }
     }
 }

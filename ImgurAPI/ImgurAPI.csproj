@@ -50,17 +50,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accounts\Account.cs" />
     <Compile Include="Albums\Album.cs" />
     <Compile Include="Comments\Comment.cs" />
     <Compile Include="Gellaries\Gallery.cs" />
     <Compile Include="Images\Image.cs" />
     <Compile Include="ImgurContext.cs" />
+    <Compile Include="Models\AccountImagesModel.cs" />
+    <Compile Include="Models\AccountSettingModel.cs" />
     <Compile Include="Models\AlbumCreationModel.cs" />
     <Compile Include="Models\AlbumImageCommentCreationModel.cs" />
     <Compile Include="Models\AlbumImagesModel.cs" />
     <Compile Include="Models\AlbumImageVotesModel.cs" />
-    <Compile Include="Models\AlbumImageVotingModel.cs" />
+    <Compile Include="Models\BasicResponseModel.cs" />
+    <Compile Include="Models\CommentCreationResponse.cs" />
+    <Compile Include="Models\VotingResponseModel.cs" />
     <Compile Include="Models\AlbumModel.cs" />
+    <Compile Include="Models\CommentsModel.cs" />
     <Compile Include="Models\GalleryAlbumModel.cs" />
     <Compile Include="Models\GallerySearchModel.cs" />
     <Compile Include="Models\ImageModel.cs" />

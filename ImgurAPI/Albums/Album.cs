@@ -46,12 +46,14 @@ namespace ImgurAPI.Albums
 
         public async Task<AlbumImageVotesModel> AlbumImageVotes(string gallerHash)
         {
-            return await this._request.GetAsync<AlbumImageVotesModel>($"gallery/{gallerHash}/votes");
+            return await this._request.GetAsync<AlbumImageVotesModel>
+                ($"gallery/{gallerHash}/votes");
         }
 
-        public async Task<AlbumImageVotingModel> AlbumImageVoting(string gallerHash, string vote)
+        public async Task<VotingResponseModel> AlbumImageVoting(string gallerHash, string vote)
         {
-            return await this._request.PostAsync<AlbumImageVotingModel>($"gallery/{gallerHash}/vote/{vote}", null, null);
+            return await this._request.PostAsync<VotingResponseModel>
+                ($"gallery/{gallerHash}/vote/{vote}", null, null);
         }
 
         public async Task<AlbumImageCommentCreationModel> AlbumImageCommentCreation(string gallerHash, string comment)
@@ -60,7 +62,14 @@ namespace ImgurAPI.Albums
             {
                 { "comment", comment }
             };
-            return await this._request.PostAsync<AlbumImageCommentCreationModel>($"gallery/{gallerHash}/comment", null, keyValuePairs);
+            return await this._request.PostAsync<AlbumImageCommentCreationModel>
+                ($"gallery/{gallerHash}/comment", null, keyValuePairs);
+        }
+
+        public async Task<BasicResponseModel> AlbumImageFavorite(string albumHash)
+        {
+            return await this._request.PostAsync<BasicResponseModel>
+                ($"album/{albumHash}/favorite", null);
         }
     }
 }

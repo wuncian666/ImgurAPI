@@ -6,10 +6,15 @@ using System.Threading.Tasks;
 
 namespace ImgurAPI.Models
 {
-    public class AlbumImageVotingModel
+    public class CommentCreationResponse
     {
-        public bool data { get; set; }
+        public Data data { get; set; }
         public bool success { get; set; }
         public int status { get; set; }
+
+        public class Data
+        {
+            public long id { get; set; }
+        }
     }
 }
