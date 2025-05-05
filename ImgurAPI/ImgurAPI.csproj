@@ -62,6 +62,7 @@
     <Compile Include="Models\AlbumImageCommentCreationModel.cs" />
     <Compile Include="Models\AlbumImagesModel.cs" />
     <Compile Include="Models\AlbumImageVotesModel.cs" />
+    <Compile Include="Models\AlbumsModel.cs" />
     <Compile Include="Models\BasicResponseModel.cs" />
     <Compile Include="Models\CommentCreationResponse.cs" />
     <Compile Include="Models\VotingResponseModel.cs" />

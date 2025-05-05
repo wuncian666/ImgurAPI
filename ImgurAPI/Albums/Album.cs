@@ -71,5 +71,27 @@ namespace ImgurAPI.Albums
             return await this._request.PostAsync<BasicResponseModel>
                 ($"album/{albumHash}/favorite", null);
         }
+
+        public async Task<BasicResponseModel> UpdateAlbum(string albumId, string[] ids, string title, string description)
+        {
+            var content = new MultipartFormDataContent();
+            if (ids != null)
+            {
+                foreach (var id in ids)
+                {
+                    content.Add(new StringContent(id, Encoding.UTF8), "ids[]");
+                }
+            }
+            if (title != null)
+            {
+                content.Add(new StringContent(title, Encoding.UTF8), "title");
+            }
+            if (description != null)
+            {
+                content.Add(new StringContent(description, Encoding.UTF8), "description");
+            }
+
+            return await this._request.PutAsync<BasicResponseModel>($"album/{albumId}", content, null);
+        }
     }
 }

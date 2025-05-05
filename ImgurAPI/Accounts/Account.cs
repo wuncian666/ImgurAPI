@@ -24,5 +24,10 @@ namespace ImgurAPI.Accounts
         {
             return await this._request.GetAsync<AccountImagesModel>($"account/me/images");
         }
+
+        public async Task<AlbumsModel> GetAlbums(string username, string page)
+        {
+            return await this._request.GetAsync<AlbumsModel>($"account/{username}/albums/{page}");
+        }
     }
 }
