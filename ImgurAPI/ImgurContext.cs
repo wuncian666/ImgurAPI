@@ -1,14 +1,10 @@
 ﻿using HttpUtils;
+using ImgurAPI.Comments;
 using ImgurAPI.Accounts;
 using ImgurAPI.Albums;
 using ImgurAPI.Gellaries;
 using ImgurAPI.Images;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ImgurAPI
 {
@@ -16,7 +12,7 @@ namespace ImgurAPI
     {
         private string _baseUrl = "https://api.imgur.com/3";
 
-        public Comments.Comment Comment;
+        public Comment Comment;
 
         public Gallery Gallery;
 
@@ -33,7 +29,7 @@ namespace ImgurAPI
                 BaseUrl = this._baseUrl,
                 Token = $"Bearer {ConfigurationManager.AppSettings["token"]}"
             };
-            this.Comment = new Comments.Comment(httpRequest);
+            this.Comment = new Comment(httpRequest);
             this.Gallery = new Gallery(httpRequest);
             this.Image = new Image(httpRequest);
             this.Album = new Album(httpRequest);

@@ -1,8 +1,8 @@
 ﻿namespace ImgurAPI.Models
 {
-    public class VotingResponseModel
+    public class AlbumIDsResponse
     {
-        public bool data { get; set; }
+        public string[] data { get; set; }
         public bool success { get; set; }
         public int status { get; set; }
     }

@@ -1,8 +1,5 @@
 ﻿using HttpUtils;
 using ImgurAPI.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,19 +13,15 @@ namespace ImgurAPI.Comments
         public Comment(IHttpRequest request)
         { this._request = request; }
 
-        public async Task<CommentsModel> GetComments(string id)
-        {
-            return await this._request.GetAsync<CommentsModel>
-                ($"gallery/{id}/comments/best");
-        }
-
-        public async Task<VotingResponseModel> CommentVoting(string commendId, string vote)
+        public async Task<VotingResponseModel> CommentVoting(
+            string commendId, string vote)
         {
             return await this._request.PostAsync<VotingResponseModel>
                 ($"comment/{commendId}/vote/{vote}", null, null);
         }
 
-        public async Task<CommentCreationResponse> CommentCreation(string imageId, string comment, string parentId = null)
+        public async Task<CommentCreationResponse> CommentCreation(
+            string imageId, string comment, string parentId = null)
         {
             var content = new MultipartFormDataContent
             {
@@ -43,7 +36,8 @@ namespace ImgurAPI.Comments
                 ("comment", content, null);
         }
 
-        public async Task<CommentCreationResponse> ReplyCreation(string imageId, string commentId, string comment)
+        public async Task<CommentCreationResponse> ReplyCreation(
+            string imageId, string commentId, string comment)
         {
             var content = new MultipartFormDataContent
             {

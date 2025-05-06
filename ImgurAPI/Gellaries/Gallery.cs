@@ -1,17 +1,14 @@
 ﻿using HttpUtils;
 using ImgurAPI.Models;
 using ImgurAPI.Models.Params;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace ImgurAPI.Gellaries
 {
     public class Gallery
     {
-        private IHttpRequest _request;
+        private readonly IHttpRequest _request;
 
         public Gallery(IHttpRequest request)
         { this._request = request; }
@@ -34,6 +31,24 @@ namespace ImgurAPI.Gellaries
         public async Task<string> GalleryImage(string galleryImageHash)
         {
             return await this._request.GetAsync($"gallery/image/{galleryImageHash}");
+        }
+
+        public async Task<AlbumImageVotesModel> AlbumImageVotes(string gallerHash)
+        {
+            return await this._request.GetAsync<AlbumImageVotesModel>
+                ($"gallery/{gallerHash}/votes");
+        }
+
+        public async Task<VotingResponseModel> AlbumImageVoting(string gallerHash, string vote)
+        {
+            return await this._request.PostAsync<VotingResponseModel>
+                ($"gallery/{gallerHash}/vote/{vote}", null, null);
+        }
+
+        public async Task<CommentsModel> GetComments(string id)
+        {
+            return await this._request.GetAsync<CommentsModel>
+                ($"gallery/{id}/comments/best");
         }
     }
 }

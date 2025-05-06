@@ -1,9 +1,7 @@
 ﻿using HttpUtils;
 using ImgurAPI.Models;
 using ImgurAPI.Models.Params;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +10,7 @@ namespace ImgurAPI.Albums
 {
     public class Album
     {
-        private IHttpRequest _request;
+        private readonly IHttpRequest _request;
 
         public Album(IHttpRequest request)
         { this._request = request; }
@@ -41,57 +39,57 @@ namespace ImgurAPI.Albums
             content.Add(new StringContent(param.Title, Encoding.UTF8), "title");
             content.Add(new StringContent(param.Description, Encoding.UTF8), "description");
             content.Add(new StringContent(param.Cover, Encoding.UTF8), "cover");
+
             return await this._request.PostAsync<AlbumCreationModel>("album", content, null);
         }
 
-        public async Task<AlbumImageVotesModel> AlbumImageVotes(string gallerHash)
-        {
-            return await this._request.GetAsync<AlbumImageVotesModel>
-                ($"gallery/{gallerHash}/votes");
-        }
-
-        public async Task<VotingResponseModel> AlbumImageVoting(string gallerHash, string vote)
-        {
-            return await this._request.PostAsync<VotingResponseModel>
-                ($"gallery/{gallerHash}/vote/{vote}", null, null);
-        }
-
-        public async Task<AlbumImageCommentCreationModel> AlbumImageCommentCreation(string gallerHash, string comment)
+        public async Task<AlbumImageCommentCreationModel> AlbumImageCommentCreation(
+            string gallerHash, string comment)
         {
             Dictionary<string, string> keyValuePairs = new Dictionary<string, string>
             {
                 { "comment", comment }
             };
+
             return await this._request.PostAsync<AlbumImageCommentCreationModel>
                 ($"gallery/{gallerHash}/comment", null, keyValuePairs);
         }
 
-        public async Task<BasicResponseModel> AlbumImageFavorite(string albumHash)
+        public async Task<BasicResponse> AlbumImageFavorite(string albumHash)
         {
-            return await this._request.PostAsync<BasicResponseModel>
+            return await this._request.PostAsync<BasicResponse>
                 ($"album/{albumHash}/favorite", null);
         }
 
-        public async Task<BasicResponseModel> UpdateAlbum(string albumId, string[] ids, string title, string description)
+        public async Task<BasicResponse> UpdateAlbum(
+            string albumId,
+            string[] ids,
+            string title,
+            string description)
         {
             var content = new MultipartFormDataContent();
-            if (ids != null)
+            foreach (var id in ids)
             {
-                foreach (var id in ids)
-                {
-                    content.Add(new StringContent(id, Encoding.UTF8), "ids[]");
-                }
+                content.Add(new StringContent(id, Encoding.UTF8), "ids[]");
             }
             if (title != null)
-            {
                 content.Add(new StringContent(title, Encoding.UTF8), "title");
-            }
             if (description != null)
-            {
                 content.Add(new StringContent(description, Encoding.UTF8), "description");
+
+            return await this._request.PutAsync<BasicResponse>($"album/{albumId}", content);
+        }
+
+        public async Task<AddImageToAnAlbumResponse> AddImageToAnAlbum(
+            string albumHash, string[] ids)
+        {
+            var content = new MultipartFormDataContent();
+            foreach (var id in ids)
+            {
+                content.Add(new StringContent(id, Encoding.UTF8), "ids[]");
             }
 
-            return await this._request.PutAsync<BasicResponseModel>($"album/{albumId}", content, null);
+            return await this._request.PostAsync<AddImageToAnAlbumResponse>($"album/{albumHash}/add", content);
         }
     }
 }
